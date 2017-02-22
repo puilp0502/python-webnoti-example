@@ -18,15 +18,17 @@ def serve_sw():
     return send_file('static/js/worker.js')
 
 
-@app.route('/register-push', methods=['POST'])
-def test_webnoti():
+@app.route('/send-notification', methods=['POST'])
+def notify():
     try:
         subscription = request.json['subscription']
+        message = request.json.get('message', None)
     except KeyError:
         return 'Subscription object does not exist', 400
-    resp = send_notification(subscription, 'Hello from server!',
+
+    resp = send_notification(subscription, message,
                              'https://hakk.kr', get_private_key('privkey.pem', b'password'))
-    return 'Success'
+    return resp.text, resp.status_code
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)

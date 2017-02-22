@@ -1,0 +1,25 @@
+.header{
+    margin-top: 5rem;
+    text-align: center;
+    font-weight: 100;
+}
+.header h2{
+    font-size: 42px;
+    font-weight: 300;
+}
+.header a{
+    text-decoration: none;
+}
+#send{
+    float: right;
+}
+#send[disabled]{
+    background-color: #485F6E;
+    border-color: #485F6E;
+    color: #86989B;
+}
+#send[disabled]:hover{
+    background-color: #485F6E;
+    border-color: #485F6E;
+    color: #86989B;
+}

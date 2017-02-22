@@ -3,9 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Python Web Notification Example</title>
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/static/css/normalize.css">
+    <link rel="stylesheet" href="/static/css/skeleton.css">
+    <link rel="stylesheet" href="/static/css/main.css">
 </head>
 <body>
-Example website using python-webnoti
+<div class="container">
+    <section class="header">
+        <h2 class="title"><a href="https://github.com/puilp0502/python-webnoti">python-webnoti</a> demo</h2>
+        <a href="https://github.com/puilp0502/python-webnoti-example" class="button">View Source</a>
+    </section>
+    <hr>
+    <section class="contents">
+        <form id="send-noti">
+            <label for="message">Message</label>
+            <textarea id="message" class="u-full-width" placeholder="Notification message here" disabled></textarea>
+            <input id="send" class="button-primary" type="submit" value="Send notification" disabled>
+        </form>
+    </section>
+</div>
 <script type="application/javascript">
     const serverKeyBase64 = "{{ server_key|safe }}"
 </script>

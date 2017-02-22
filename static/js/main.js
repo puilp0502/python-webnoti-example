@@ -29,14 +29,11 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
                         applicationServerKey: serverKey,
                     }).then(
                         function (subscription) {
-                            // Send subscription information to server
-                            let request = new XMLHttpRequest();
-                            request.open('POST', '/register-push');
-                            request.onload = function(){
-                                console.log(request.responseText);
-                            };
-                            request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-                            request.send(JSON.stringify({'subscription': subscription}));
+                            // Store subscription in global context
+                            window.subscription = subscription;
+                            console.log('subscription obtained: '+JSON.stringify(subscription));
+                            // Enable UI
+                            enableUI();
                         }, function (error) {
                             console.error(error);
                         }

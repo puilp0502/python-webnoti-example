@@ -12,3 +12,26 @@ function base64UrlToUint8Array(base64UrlData) {
     }
     return buffer;
 }
+function enableUI(){
+    let form = document.querySelector('#send-noti');
+    let button = document.querySelector('#send');
+    let textarea = document.querySelector('#message');
+    form.addEventListener('submit', function(e){
+        let request = new XMLHttpRequest();
+        request.open('POST', '/send-notification');
+        request.setRequestHeader('Content-Type', 'application/json');
+        request.addEventListener('load', function(e){
+            console.log(e);
+            console.log(this);
+        });
+        if (textarea.value === ""){
+            request.send(JSON.stringify({subscription: window.subscription}));
+        } else {
+            request.send(JSON.stringify({subscription: window.subscription, message: textarea.value}));
+        }
+        e.preventDefault();
+    });
+    button.removeAttribute('disabled');
+    textarea.removeAttribute('disabled');
+    console.log('Enabled UI');
+}
