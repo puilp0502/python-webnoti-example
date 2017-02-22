@@ -2,76 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Python Web Notification Example</title>
 </head>
 <body>
-Web Push Notification Test
+Example website using python-webnoti
 <script type="application/javascript">
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function(){
-            function askPermission() {
-                return new Promise(function(resolve, reject) {
-                    const permissionResult = Notification.requestPermission(function(result) {
-                        resolve(result);
-                    });
-
-                    if (permissionResult) {
-                        permissionResult.then(resolve, reject);
-                    }
-                })
-            }
-            function base64UrlToUint8Array(base64UrlData) {
-                const padding = '='.repeat((4 - base64UrlData.length % 4) % 4);
-                const base64 = (base64UrlData + padding)
-                    .replace(/\-/g, '+')
-                    .replace(/_/g, '/');
-
-                const rawData = window.atob(base64);
-                const buffer = new Uint8Array(rawData.length);
-
-                for (let i = 0; i < rawData.length; ++i) {
-                    buffer[i] = rawData.charCodeAt(i);
-                }
-                return buffer;
-            }
-            const serverKey = base64UrlToUint8Array(
-                "{{ server_key|safe }}");
-            let permRequest = askPermission();
-            let registrationRequest = navigator.serviceWorker.register('/service-worker.js');
-            Promise.all([permRequest, registrationRequest])
-                .then(function(result){
-                    let permission = result[0];
-                    let registration = result[1];
-                    console.log(permission);
-                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
-                    if (permission === 'granted') {
-                        registration.pushManager.subscribe({
-                            userVisibleOnly: true,
-                            applicationServerKey: serverKey
-                        }).then(
-                            function (subscription) {
-                                let request = new XMLHttpRequest();
-                                request.open('POST', '/register-push');
-                                request.onload = function(){
-                                    console.log(request.responseText);
-                                };
-                                request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-                                request.send(JSON.stringify({'subscription': subscription}));
-                                console.log(JSON.stringify(subscription));
-                            }, function (error) {
-                                console.log(error);
-                                console.error(error);
-                            }
-                        );
-                    } else {
-                        console.log('Permission is not granted')
-                    }
-                })
-                .catch(function(err){
-                    console.log('ServiceWorker registration failed: ', err);
-                });
-        })
-    }
+    const serverKeyBase64 = "{{ server_key|safe }}"
 </script>
+<script src="/static/js/utils.js" type="application/javascript"></script>
+<script src="/static/js/main.js" type="application/javascript"></script>
 </body>
 </html>
