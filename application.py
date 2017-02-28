@@ -22,10 +22,10 @@ def serve_sw():
 def notify():
     try:
         subscription = request.json['subscription']
-        message = request.json.get('message', None)
     except KeyError:
         return 'Subscription object does not exist', 400
 
+    message = request.json.get('message', None)
     resp = send_notification(subscription, message,
                              'https://hakk.kr', get_private_key('privkey.pem', b'password'))
     return resp.text, resp.status_code
