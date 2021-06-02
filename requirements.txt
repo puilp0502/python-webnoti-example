@@ -13,5 +13,5 @@ pycparser==2.20
 PyJWT==1.7.1
 python-webnoti==0.4.1
 requests==2.25.1
-urllib3==1.26.4
+urllib3==1.26.5
 Werkzeug==1.0.1
