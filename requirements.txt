@@ -10,7 +10,7 @@ itsdangerous==1.1.0
 Jinja2==2.11.3
 MarkupSafe==1.1.1
 pycparser==2.20
-PyJWT==1.7.1
+PyJWT==2.4.0
 python-webnoti==0.4.1
 requests==2.25.1
 urllib3==1.26.4
